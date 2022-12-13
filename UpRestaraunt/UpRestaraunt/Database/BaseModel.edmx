@@ -1,0 +1,1186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище RestaurantModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id_client" />
+          </Key>
+          <Property Name="Id_client" Type="int" Nullable="false" />
+          <Property Name="Last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="First_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middle_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number_phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Count_orders" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_visit" Type="int" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Dishes">
+          <Key>
+            <PropertyRef Name="Id_dish" />
+          </Key>
+          <Property Name="Id_dish" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Time_cooking" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Id_menu" Type="int" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Dishes_in_order">
+          <Key>
+            <PropertyRef Name="Id_dishes_in_order" />
+          </Key>
+          <Property Name="Id_dishes_in_order" Type="int" Nullable="false" />
+          <Property Name="Id_order" Type="int" />
+          <Property Name="Id_dish" Type="int" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id_employee" />
+          </Key>
+          <Property Name="Id_employee" Type="int" Nullable="false" />
+          <Property Name="Last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="First_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middle_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number_phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_post" Type="int" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Halls">
+          <Key>
+            <PropertyRef Name="Id_hall" />
+          </Key>
+          <Property Name="Id_hall" Type="int" Nullable="false" />
+          <Property Name="Count_places" Type="int" Nullable="false" />
+          <Property Name="Ready_to_work" Type="bit" Nullable="false" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="Id_menu" />
+          </Key>
+          <Property Name="Id_menu" Type="int" Nullable="false" />
+          <Property Name="Id_type_menu" Type="int" />
+          <Property Name="Id_hall" Type="int" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id_order" />
+          </Key>
+          <Property Name="Id_order" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Id_visit" Type="int" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id_post" />
+          </Key>
+          <Property Name="Id_post" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Tables">
+          <Key>
+            <PropertyRef Name="Id_table" />
+          </Key>
+          <Property Name="Id_table" Type="int" Nullable="false" />
+          <Property Name="Id_hall" Type="int" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Types_menu">
+          <Key>
+            <PropertyRef Name="Id_type_menu" />
+          </Key>
+          <Property Name="Id_type_menu" Type="int" Nullable="false" />
+          <Property Name="Count_dishes" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_user" />
+          </Key>
+          <Property Name="Id_user" Type="int" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Visits">
+          <Key>
+            <PropertyRef Name="Id_visit" />
+          </Key>
+          <Property Name="Id_visit" Type="int" Nullable="false" />
+          <Property Name="Time_visit" Type="datetime" Nullable="false" />
+          <Property Name="Id_client" Type="int" />
+          <Property Name="Id_employee" Type="int" />
+          <Property Name="Id_table" Type="int" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <Association Name="FK_Id_client">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id_client" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="Id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_dish">
+          <End Role="Dishes" Type="Self.Dishes" Multiplicity="0..1" />
+          <End Role="Dishes_in_order" Type="Self.Dishes_in_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dishes">
+              <PropertyRef Name="Id_dish" />
+            </Principal>
+            <Dependent Role="Dishes_in_order">
+              <PropertyRef Name="Id_dish" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_employee">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="Id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_hall">
+          <End Role="Halls" Type="Self.Halls" Multiplicity="0..1" />
+          <End Role="Tables" Type="Self.Tables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Halls">
+              <PropertyRef Name="Id_hall" />
+            </Principal>
+            <Dependent Role="Tables">
+              <PropertyRef Name="Id_hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_halls">
+          <End Role="Halls" Type="Self.Halls" Multiplicity="0..1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Halls">
+              <PropertyRef Name="Id_hall" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="Id_hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_menu">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
+          <End Role="Dishes" Type="Self.Dishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="Id_menu" />
+            </Principal>
+            <Dependent Role="Dishes">
+              <PropertyRef Name="Id_menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_order">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Dishes_in_order" Type="Self.Dishes_in_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id_order" />
+            </Principal>
+            <Dependent Role="Dishes_in_order">
+              <PropertyRef Name="Id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_post">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id_post" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_table">
+          <End Role="Tables" Type="Self.Tables" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tables">
+              <PropertyRef Name="Id_table" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="Id_table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_type_menu">
+          <End Role="Types_menu" Type="Self.Types_menu" Multiplicity="0..1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_menu">
+              <PropertyRef Name="Id_type_menu" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="Id_type_menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_clients">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_dishes">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Dishes" Type="Self.Dishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Dishes">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_dishes_in_order">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Dishes_in_order" Type="Self.Dishes_in_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Dishes_in_order">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_employees">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_halls">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Halls" Type="Self.Halls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Halls">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_menus">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_orders">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_posts">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_tables">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tables" Type="Self.Tables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Tables">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_types_menu">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Types_menu" Type="Self.Types_menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Types_menu">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_visits">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_visit">
+          <End Role="Visits" Type="Self.Visits" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visits">
+              <PropertyRef Name="Id_visit" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Id_visit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище RestaurantModelContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dishes" EntityType="Self.Dishes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dishes_in_order" EntityType="Self.Dishes_in_order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Halls" EntityType="Self.Halls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tables" EntityType="Self.Tables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types_menu" EntityType="Self.Types_menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visits" EntityType="Self.Visits" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Id_client" Association="Self.FK_Id_client">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_dish" Association="Self.FK_Id_dish">
+            <End Role="Dishes" EntitySet="Dishes" />
+            <End Role="Dishes_in_order" EntitySet="Dishes_in_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_employee" Association="Self.FK_Id_employee">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_hall" Association="Self.FK_Id_hall">
+            <End Role="Halls" EntitySet="Halls" />
+            <End Role="Tables" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_halls" Association="Self.FK_Id_halls">
+            <End Role="Halls" EntitySet="Halls" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_menu" Association="Self.FK_Id_menu">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Dishes" EntitySet="Dishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_order" Association="Self.FK_Id_order">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Dishes_in_order" EntitySet="Dishes_in_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_post" Association="Self.FK_Id_post">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_table" Association="Self.FK_Id_table">
+            <End Role="Tables" EntitySet="Tables" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_type_menu" Association="Self.FK_Id_type_menu">
+            <End Role="Types_menu" EntitySet="Types_menu" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_clients" Association="Self.FK_Id_user_clients">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_dishes" Association="Self.FK_Id_user_dishes">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Dishes" EntitySet="Dishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_dishes_in_order" Association="Self.FK_Id_user_dishes_in_order">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Dishes_in_order" EntitySet="Dishes_in_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_employees" Association="Self.FK_Id_user_employees">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_halls" Association="Self.FK_Id_user_halls">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Halls" EntitySet="Halls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_menus" Association="Self.FK_Id_user_menus">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_orders" Association="Self.FK_Id_user_orders">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_posts" Association="Self.FK_Id_user_posts">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_tables" Association="Self.FK_Id_user_tables">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tables" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_types_menu" Association="Self.FK_Id_user_types_menu">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Types_menu" EntitySet="Types_menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_visits" Association="Self.FK_Id_user_visits">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_visit" Association="Self.FK_Id_visit">
+            <End Role="Visits" EntitySet="Visits" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestaurantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id_client" />
+          </Key>
+          <Property Name="Id_client" Type="Int32" Nullable="false" />
+          <Property Name="Last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="First_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Count_orders" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_visit" Type="Int32" />
+          <NavigationProperty Name="Visits" Relationship="Self.FK_Id_client" FromRole="Clients" ToRole="Visits" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_clients" FromRole="Clients" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Dishes">
+          <Key>
+            <PropertyRef Name="Id_dish" />
+          </Key>
+          <Property Name="Id_dish" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time_cooking" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Id_menu" Type="Int32" />
+          <NavigationProperty Name="Dishes_in_order" Relationship="Self.FK_Id_dish" FromRole="Dishes" ToRole="Dishes_in_order" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK_Id_menu" FromRole="Dishes" ToRole="Menus" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_dishes" FromRole="Dishes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Dishes_in_order">
+          <Key>
+            <PropertyRef Name="Id_dishes_in_order" />
+          </Key>
+          <Property Name="Id_dishes_in_order" Type="Int32" Nullable="false" />
+          <Property Name="Id_order" Type="Int32" />
+          <Property Name="Id_dish" Type="Int32" />
+          <NavigationProperty Name="Dishes" Relationship="Self.FK_Id_dish" FromRole="Dishes_in_order" ToRole="Dishes" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Id_order" FromRole="Dishes_in_order" ToRole="Orders" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_dishes_in_order" FromRole="Dishes_in_order" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id_employee" />
+          </Key>
+          <Property Name="Id_employee" Type="Int32" Nullable="false" />
+          <Property Name="Last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="First_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_post" Type="Int32" />
+          <NavigationProperty Name="Visits" Relationship="Self.FK_Id_employee" FromRole="Employees" ToRole="Visits" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Id_post" FromRole="Employees" ToRole="Posts" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_employees" FromRole="Employees" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Halls">
+          <Key>
+            <PropertyRef Name="Id_hall" />
+          </Key>
+          <Property Name="Id_hall" Type="Int32" Nullable="false" />
+          <Property Name="Count_places" Type="Int32" Nullable="false" />
+          <Property Name="Ready_to_work" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tables" Relationship="Self.FK_Id_hall" FromRole="Halls" ToRole="Tables" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK_Id_halls" FromRole="Halls" ToRole="Menus" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_halls" FromRole="Halls" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="Id_menu" />
+          </Key>
+          <Property Name="Id_menu" Type="Int32" Nullable="false" />
+          <Property Name="Id_type_menu" Type="Int32" />
+          <Property Name="Id_hall" Type="Int32" />
+          <NavigationProperty Name="Dishes" Relationship="Self.FK_Id_menu" FromRole="Menus" ToRole="Dishes" />
+          <NavigationProperty Name="Halls" Relationship="Self.FK_Id_halls" FromRole="Menus" ToRole="Halls" />
+          <NavigationProperty Name="Types_menu" Relationship="Self.FK_Id_type_menu" FromRole="Menus" ToRole="Types_menu" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_menus" FromRole="Menus" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id_order" />
+          </Key>
+          <Property Name="Id_order" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Id_visit" Type="Int32" />
+          <NavigationProperty Name="Dishes_in_order" Relationship="Self.FK_Id_order" FromRole="Orders" ToRole="Dishes_in_order" />
+          <NavigationProperty Name="Visits" Relationship="Self.FK_Id_visit" FromRole="Orders" ToRole="Visits" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_orders" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id_post" />
+          </Key>
+          <Property Name="Id_post" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Id_post" FromRole="Posts" ToRole="Employees" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_posts" FromRole="Posts" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Tables">
+          <Key>
+            <PropertyRef Name="Id_table" />
+          </Key>
+          <Property Name="Id_table" Type="Int32" Nullable="false" />
+          <Property Name="Id_hall" Type="Int32" />
+          <NavigationProperty Name="Halls" Relationship="Self.FK_Id_hall" FromRole="Tables" ToRole="Halls" />
+          <NavigationProperty Name="Visits" Relationship="Self.FK_Id_table" FromRole="Tables" ToRole="Visits" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_tables" FromRole="Tables" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Types_menu">
+          <Key>
+            <PropertyRef Name="Id_type_menu" />
+          </Key>
+          <Property Name="Id_type_menu" Type="Int32" Nullable="false" />
+          <Property Name="Count_dishes" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK_Id_type_menu" FromRole="Types_menu" ToRole="Menus" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_types_menu" FromRole="Types_menu" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_user" />
+          </Key>
+          <Property Name="Id_user" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Visits" Relationship="RestaurantModel.FK_Id_user" FromRole="Users" ToRole="Visits" />
+          <NavigationProperty Name="Clients" Relationship="RestaurantModel.FK_Id_user_clients" FromRole="Users" ToRole="Clients" />
+          <NavigationProperty Name="Dishes" Relationship="RestaurantModel.FK_Id_user_dishes" FromRole="Users" ToRole="Dishes" />
+          <NavigationProperty Name="Dishes_in_order" Relationship="RestaurantModel.FK_Id_user_dishes_in_order" FromRole="Users" ToRole="Dishes_in_order" />
+          <NavigationProperty Name="Employees" Relationship="RestaurantModel.FK_Id_user_employees" FromRole="Users" ToRole="Employees" />
+          <NavigationProperty Name="Halls" Relationship="RestaurantModel.FK_Id_user_halls" FromRole="Users" ToRole="Halls" />
+          <NavigationProperty Name="Menus" Relationship="RestaurantModel.FK_Id_user_menus" FromRole="Users" ToRole="Menus" />
+          <NavigationProperty Name="Orders" Relationship="RestaurantModel.FK_Id_user_orders" FromRole="Users" ToRole="Orders" />
+          <NavigationProperty Name="Posts" Relationship="RestaurantModel.FK_Id_user_posts" FromRole="Users" ToRole="Posts" />
+          <NavigationProperty Name="Tables" Relationship="RestaurantModel.FK_Id_user_tables" FromRole="Users" ToRole="Tables" />
+          <NavigationProperty Name="Types_menu" Relationship="RestaurantModel.FK_Id_user_types_menu" FromRole="Users" ToRole="Types_menu" />
+        </EntityType>
+        <EntityType Name="Visits">
+          <Key>
+            <PropertyRef Name="Id_visit" />
+          </Key>
+          <Property Name="Id_visit" Type="Int32" Nullable="false" />
+          <Property Name="Time_visit" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_client" Type="Int32" />
+          <Property Name="Id_employee" Type="Int32" />
+          <Property Name="Id_table" Type="Int32" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Id_client" FromRole="Visits" ToRole="Clients" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Id_employee" FromRole="Visits" ToRole="Employees" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Id_visit" FromRole="Visits" ToRole="Orders" />
+          <NavigationProperty Name="Tables" Relationship="Self.FK_Id_table" FromRole="Visits" ToRole="Tables" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user" FromRole="Visits" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_Id_client">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id_client" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="Id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_dish">
+          <End Role="Dishes" Type="Self.Dishes" Multiplicity="0..1" />
+          <End Role="Dishes_in_order" Type="Self.Dishes_in_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dishes">
+              <PropertyRef Name="Id_dish" />
+            </Principal>
+            <Dependent Role="Dishes_in_order">
+              <PropertyRef Name="Id_dish" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_menu">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
+          <End Role="Dishes" Type="Self.Dishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="Id_menu" />
+            </Principal>
+            <Dependent Role="Dishes">
+              <PropertyRef Name="Id_menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_order">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Dishes_in_order" Type="Self.Dishes_in_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id_order" />
+            </Principal>
+            <Dependent Role="Dishes_in_order">
+              <PropertyRef Name="Id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_employee">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="Id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_post">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id_post" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_hall">
+          <End Role="Halls" Type="Self.Halls" Multiplicity="0..1" />
+          <End Role="Tables" Type="Self.Tables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Halls">
+              <PropertyRef Name="Id_hall" />
+            </Principal>
+            <Dependent Role="Tables">
+              <PropertyRef Name="Id_hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_halls">
+          <End Role="Halls" Type="Self.Halls" Multiplicity="0..1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Halls">
+              <PropertyRef Name="Id_hall" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="Id_hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_type_menu">
+          <End Role="Types_menu" Type="Self.Types_menu" Multiplicity="0..1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_menu">
+              <PropertyRef Name="Id_type_menu" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="Id_type_menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_visit">
+          <End Role="Visits" Type="Self.Visits" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visits">
+              <PropertyRef Name="Id_visit" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Id_visit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_table">
+          <End Role="Tables" Type="Self.Tables" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tables">
+              <PropertyRef Name="Id_table" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="Id_table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestaurantEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Dishes" EntityType="Self.Dishes" />
+          <EntitySet Name="Dishes_in_order" EntityType="Self.Dishes_in_order" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Halls" EntityType="Self.Halls" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" />
+          <EntitySet Name="Tables" EntityType="Self.Tables" />
+          <EntitySet Name="Types_menu" EntityType="Self.Types_menu" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Visits" EntityType="Self.Visits" />
+          <AssociationSet Name="FK_Id_client" Association="Self.FK_Id_client">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_dish" Association="Self.FK_Id_dish">
+            <End Role="Dishes" EntitySet="Dishes" />
+            <End Role="Dishes_in_order" EntitySet="Dishes_in_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_menu" Association="Self.FK_Id_menu">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Dishes" EntitySet="Dishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_order" Association="Self.FK_Id_order">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Dishes_in_order" EntitySet="Dishes_in_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_employee" Association="Self.FK_Id_employee">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_post" Association="Self.FK_Id_post">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_hall" Association="Self.FK_Id_hall">
+            <End Role="Halls" EntitySet="Halls" />
+            <End Role="Tables" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_halls" Association="Self.FK_Id_halls">
+            <End Role="Halls" EntitySet="Halls" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_type_menu" Association="Self.FK_Id_type_menu">
+            <End Role="Types_menu" EntitySet="Types_menu" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_visit" Association="Self.FK_Id_visit">
+            <End Role="Visits" EntitySet="Visits" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_table" Association="Self.FK_Id_table">
+            <End Role="Tables" EntitySet="Tables" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user" Association="RestaurantModel.FK_Id_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_clients" Association="RestaurantModel.FK_Id_user_clients">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_dishes" Association="RestaurantModel.FK_Id_user_dishes">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Dishes" EntitySet="Dishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_dishes_in_order" Association="RestaurantModel.FK_Id_user_dishes_in_order">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Dishes_in_order" EntitySet="Dishes_in_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_employees" Association="RestaurantModel.FK_Id_user_employees">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_halls" Association="RestaurantModel.FK_Id_user_halls">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Halls" EntitySet="Halls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_menus" Association="RestaurantModel.FK_Id_user_menus">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_orders" Association="RestaurantModel.FK_Id_user_orders">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_posts" Association="RestaurantModel.FK_Id_user_posts">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_tables" Association="RestaurantModel.FK_Id_user_tables">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tables" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Id_user_types_menu" Association="RestaurantModel.FK_Id_user_types_menu">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Types_menu" EntitySet="Types_menu" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Id_user">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Visits" Role="Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_clients">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Clients" Role="Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_dishes">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Dishes" Role="Dishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Dishes">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_dishes_in_order">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Dishes_in_order" Role="Dishes_in_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Dishes_in_order">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_employees">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Employees" Role="Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_halls">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Halls" Role="Halls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Halls">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_menus">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Menus" Role="Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_orders">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_posts">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Posts" Role="Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_tables">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Tables" Role="Tables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Tables">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Id_user_types_menu">
+          <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Types_menu" Role="Types_menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Types_menu">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище RestaurantModelContainer" CdmEntityContainer="RestaurantEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="RestaurantModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_client" ColumnName="Id_client" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="First_name" ColumnName="First_name" />
+                <ScalarProperty Name="Middle_name" ColumnName="Middle_name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Number_phone" ColumnName="Number_phone" />
+                <ScalarProperty Name="Count_orders" ColumnName="Count_orders" />
+                <ScalarProperty Name="Id_visit" ColumnName="Id_visit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dishes">
+            <EntityTypeMapping TypeName="RestaurantModel.Dishes">
+              <MappingFragment StoreEntitySet="Dishes">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_dish" ColumnName="Id_dish" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Time_cooking" ColumnName="Time_cooking" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id_menu" ColumnName="Id_menu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dishes_in_order">
+            <EntityTypeMapping TypeName="RestaurantModel.Dishes_in_order">
+              <MappingFragment StoreEntitySet="Dishes_in_order">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_dishes_in_order" ColumnName="Id_dishes_in_order" />
+                <ScalarProperty Name="Id_order" ColumnName="Id_order" />
+                <ScalarProperty Name="Id_dish" ColumnName="Id_dish" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="RestaurantModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_employee" ColumnName="Id_employee" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="First_name" ColumnName="First_name" />
+                <ScalarProperty Name="Middle_name" ColumnName="Middle_name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Number_phone" ColumnName="Number_phone" />
+                <ScalarProperty Name="Id_post" ColumnName="Id_post" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Halls">
+            <EntityTypeMapping TypeName="RestaurantModel.Halls">
+              <MappingFragment StoreEntitySet="Halls">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_hall" ColumnName="Id_hall" />
+                <ScalarProperty Name="Count_places" ColumnName="Count_places" />
+                <ScalarProperty Name="Ready_to_work" ColumnName="Ready_to_work" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="RestaurantModel.Menus">
+              <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_menu" ColumnName="Id_menu" />
+                <ScalarProperty Name="Id_type_menu" ColumnName="Id_type_menu" />
+                <ScalarProperty Name="Id_hall" ColumnName="Id_hall" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="RestaurantModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_order" ColumnName="Id_order" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id_visit" ColumnName="Id_visit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="RestaurantModel.Posts">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_post" ColumnName="Id_post" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tables">
+            <EntityTypeMapping TypeName="RestaurantModel.Tables">
+              <MappingFragment StoreEntitySet="Tables">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_table" ColumnName="Id_table" />
+                <ScalarProperty Name="Id_hall" ColumnName="Id_hall" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types_menu">
+            <EntityTypeMapping TypeName="RestaurantModel.Types_menu">
+              <MappingFragment StoreEntitySet="Types_menu">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_type_menu" ColumnName="Id_type_menu" />
+                <ScalarProperty Name="Count_dishes" ColumnName="Count_dishes" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RestaurantModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visits">
+            <EntityTypeMapping TypeName="RestaurantModel.Visits">
+              <MappingFragment StoreEntitySet="Visits">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_visit" ColumnName="Id_visit" />
+                <ScalarProperty Name="Time_visit" ColumnName="Time_visit" />
+                <ScalarProperty Name="Id_client" ColumnName="Id_client" />
+                <ScalarProperty Name="Id_employee" ColumnName="Id_employee" />
+                <ScalarProperty Name="Id_table" ColumnName="Id_table" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
