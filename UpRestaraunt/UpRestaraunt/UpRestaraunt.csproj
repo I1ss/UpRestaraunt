@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -71,10 +74,24 @@
     <Compile Include="Commands\AuthorizationCommand.cs" />
     <Compile Include="Commands\BaseTypeCommand.cs" />
     <Compile Include="Commands\RegistrationCommand.cs" />
+    <Compile Include="Commands\SwitchToMainPageCommand.cs" />
+    <Compile Include="Commands\SwitchToSettingsPageCommand.cs" />
+    <Compile Include="Commands\SwitchToTablesPageCommand.cs" />
     <Compile Include="Commands\TryToRegistrationCommand.cs" />
     <Compile Include="Controls\AuthenticationControl.xaml.cs">
       <DependentUpon>AuthenticationControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MainPageControl.xaml.cs">
+      <DependentUpon>MainPageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SettingsUserControl.xaml.cs">
+      <DependentUpon>SettingsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TabTablesControl.xaml.cs">
+      <DependentUpon>TabTablesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\GroupConverter.cs" />
+    <Compile Include="Converters\InversionBoolConverter.cs" />
     <Compile Include="Converters\VisibleOrCollapsedConverter.cs" />
     <Compile Include="Converters\VisibleOrHiddenConverter.cs" />
     <Compile Include="Database\BaseModel.Context.cs">
@@ -128,8 +145,12 @@
     <Compile Include="Database\Visits.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\DataBaseUtilities.cs" />
     <Compile Include="ViewModels\AuthenticationVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
+    <Compile Include="ViewModels\MainPageVM.cs" />
+    <Compile Include="ViewModels\SettingsUserVM.cs" />
+    <Compile Include="ViewModels\TabTablesVM.cs" />
     <Compile Include="ViewModels\UpRestarauntVM.cs" />
     <Compile Include="Windows\UpRestarauntWindow.xaml.cs">
       <DependentUpon>UpRestarauntWindow.xaml</DependentUpon>
@@ -177,6 +198,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\MainPageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SettingsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TabTablesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\UpRestarauntWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -193,6 +226,10 @@
       <DependentUpon>BaseModel.edmx</DependentUpon>
       <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Main.png" />
+    <Resource Include="Resources\Gear.png" />
+    <Resource Include="Resources\Table.png" />
+    <Resource Include="Resources\Quit.png" />
     <Resource Include="Resources\Unlock.png" />
     <Resource Include="Resources\User.png" />
     <Resource Include="Resources\Password.png" />

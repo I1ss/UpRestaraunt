@@ -30,7 +30,6 @@
                 newUser.Password = authenticationVM.PasswordUser;
                 context.Users.Add(newUser);
 
-
                 RestaurantEntities.GetContext().SaveChanges();
                 MessageBox.Show("Поздравляем, Вы успешно зарегистрировались!", "Регистрация.");
                 authenticationVM.IsAuthentication = false;
