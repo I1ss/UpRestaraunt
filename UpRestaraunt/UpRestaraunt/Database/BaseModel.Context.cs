@@ -15,12 +15,7 @@ namespace UpRestaraunt.Database
     
     public partial class RestaurantEntities : DbContext
     {
-        private static RestaurantEntities _context;
-
-        public RestaurantEntities()
-            : base("name=RestaurantEntities")
-        {
-        }
+        private static RestaurantEntities _context { get; set; }
 
         public static RestaurantEntities GetContext()
         {
@@ -30,6 +25,11 @@ namespace UpRestaraunt.Database
             return _context;
         }
 
+        public RestaurantEntities()
+            : base("name=RestaurantEntities")
+        {
+        }
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

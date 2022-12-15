@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="UpRestaraunt.Controls.TabTablesControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UpRestaraunt.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TabControl Margin="25" >
+            <TabItem Header="Клиенты" />
+            <TabItem Header="Блюда" />
+            <TabItem Header="Блюда в заказе" />
+            <TabItem Header="Работники" />
+            <TabItem Header="Залы" />
+            <TabItem Header="Меню" />
+            <TabItem Header="Заказы" />
+            <TabItem Header="Должности" />
+            <TabItem Header="Столики" />
+            <TabItem Header="Типы меню" />
+            <TabItem Header="Посещения" />
+            <TabItem Header="Пользователи" />
+        </TabControl>
+    </Grid>
+</UserControl>

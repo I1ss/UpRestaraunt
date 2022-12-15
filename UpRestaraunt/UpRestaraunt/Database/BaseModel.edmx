@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id_client" />
           </Key>
-          <Property Name="Id_client" Type="int" Nullable="false" />
+          <Property Name="Id_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="First_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Middle_name" Type="nvarchar" MaxLength="50" />
@@ -23,7 +23,7 @@
           <Key>
             <PropertyRef Name="Id_dish" />
           </Key>
-          <Property Name="Id_dish" Type="int" Nullable="false" />
+          <Property Name="Id_dish" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Time_cooking" Type="datetime" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
@@ -34,7 +34,7 @@
           <Key>
             <PropertyRef Name="Id_dishes_in_order" />
           </Key>
-          <Property Name="Id_dishes_in_order" Type="int" Nullable="false" />
+          <Property Name="Id_dishes_in_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_order" Type="int" />
           <Property Name="Id_dish" Type="int" />
           <Property Name="Id_user" Type="int" />
@@ -43,7 +43,7 @@
           <Key>
             <PropertyRef Name="Id_employee" />
           </Key>
-          <Property Name="Id_employee" Type="int" Nullable="false" />
+          <Property Name="Id_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="First_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Middle_name" Type="nvarchar" MaxLength="50" />
@@ -56,7 +56,7 @@
           <Key>
             <PropertyRef Name="Id_hall" />
           </Key>
-          <Property Name="Id_hall" Type="int" Nullable="false" />
+          <Property Name="Id_hall" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Count_places" Type="int" Nullable="false" />
           <Property Name="Ready_to_work" Type="bit" Nullable="false" />
           <Property Name="Id_user" Type="int" />
@@ -65,7 +65,7 @@
           <Key>
             <PropertyRef Name="Id_menu" />
           </Key>
-          <Property Name="Id_menu" Type="int" Nullable="false" />
+          <Property Name="Id_menu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_type_menu" Type="int" />
           <Property Name="Id_hall" Type="int" />
           <Property Name="Id_user" Type="int" />
@@ -74,7 +74,7 @@
           <Key>
             <PropertyRef Name="Id_order" />
           </Key>
-          <Property Name="Id_order" Type="int" Nullable="false" />
+          <Property Name="Id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="Id_visit" Type="int" />
           <Property Name="Id_user" Type="int" />
@@ -83,7 +83,7 @@
           <Key>
             <PropertyRef Name="Id_post" />
           </Key>
-          <Property Name="Id_post" Type="int" Nullable="false" />
+          <Property Name="Id_post" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Salary" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Id_user" Type="int" />
@@ -92,7 +92,7 @@
           <Key>
             <PropertyRef Name="Id_table" />
           </Key>
-          <Property Name="Id_table" Type="int" Nullable="false" />
+          <Property Name="Id_table" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_hall" Type="int" />
           <Property Name="Id_user" Type="int" />
         </EntityType>
@@ -100,7 +100,7 @@
           <Key>
             <PropertyRef Name="Id_type_menu" />
           </Key>
-          <Property Name="Id_type_menu" Type="int" Nullable="false" />
+          <Property Name="Id_type_menu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Count_dishes" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Id_user" Type="int" />
@@ -109,7 +109,7 @@
           <Key>
             <PropertyRef Name="Id_user" />
           </Key>
-          <Property Name="Id_user" Type="int" Nullable="false" />
+          <Property Name="Id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -117,7 +117,7 @@
           <Key>
             <PropertyRef Name="Id_visit" />
           </Key>
-          <Property Name="Id_visit" Type="int" Nullable="false" />
+          <Property Name="Id_visit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Time_visit" Type="datetime" Nullable="false" />
           <Property Name="Id_client" Type="int" />
           <Property Name="Id_employee" Type="int" />

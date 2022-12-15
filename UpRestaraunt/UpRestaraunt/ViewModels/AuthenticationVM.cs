@@ -98,17 +98,17 @@
         /// <summary>
         /// Команда, когда пользователь собирается перейти к регистрации.
         /// </summary>
-        public ICommand TryRegistrationCommand { get; set; }
+        public TryToRegistrationCommand TryRegistrationCommand { get; set; }
 
         /// <summary>
         /// Команда, когда пользователь собирается зарегистрироваться.
         /// </summary>
-        public ICommand RegistrationCommand { get; set; }
+        public RegistrationCommand RegistrationCommand { get; set; }
 
         /// <summary>
         /// Команда, когда пользователь собирается авторизироваться.
         /// </summary>
-        public ICommand AuthorizationCommand { get; set; }
+        public AuthorizationCommand AuthorizationCommand { get; set; }
 
         /// <summary>
         /// Конструктор вью-модели контрола аутентификации: авторизации/регистрации..
