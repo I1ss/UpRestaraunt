@@ -31,8 +31,9 @@
                 context.Users.Add(newUser);
 
                 RestaurantEntities.GetContext().SaveChanges();
-                MessageBox.Show("Поздравляем, Вы успешно зарегистрировались!", "Регистрация.");
+                authenticationVM.CurrentUser = newUser;
                 authenticationVM.IsAuthentication = false;
+                MessageBox.Show("Поздравляем, Вы успешно зарегистрировались!", "Регистрация.");
             }
             catch (Exception exception)
             {

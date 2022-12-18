@@ -1,8 +1,7 @@
 ﻿namespace UpRestaraunt.ViewModels
 {
-    using System.Windows.Input;
-
     using UpRestaraunt.Commands;
+    using UpRestaraunt.Database;
 
     /// <summary>
     /// Вью-модель контрола аутентификации: авторизации/регистрации.
@@ -23,6 +22,9 @@
 
         /// <inheritdoc cref="IsAuthentication" />
         private bool _isAuthentication { get; set; }
+
+        /// <inheritdoc cref="CurrentUser" />
+        private Users _currentUser { get; set; }
 
         /// <summary>
         /// Состояние аутентификации, к которому можно перейти: регистрация/авторизация.
@@ -96,6 +98,19 @@
         }
 
         /// <summary>
+        /// Текущий авторизованный пользователь.
+        /// </summary>
+        public Users CurrentUser
+        {
+            get { return _currentUser; }
+            set
+            {
+                _currentUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
         /// Команда, когда пользователь собирается перейти к регистрации.
         /// </summary>
         public TryToRegistrationCommand TryRegistrationCommand { get; set; }
@@ -120,6 +135,9 @@
             PasswordUser = "Пароль";
             IsAuthentication = true;
             IsRegistration = true;
+
+            CurrentUser = new Users();
+
             TryRegistrationCommand = new TryToRegistrationCommand();
             RegistrationCommand = new RegistrationCommand();
             AuthorizationCommand = new AuthorizationCommand();

@@ -245,7 +245,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_clients">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -257,7 +259,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_dishes">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Dishes" Type="Self.Dishes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -269,7 +273,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_dishes_in_order">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Dishes_in_order" Type="Self.Dishes_in_order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -281,7 +287,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_employees">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -293,7 +301,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_halls">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Halls" Type="Self.Halls" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -305,7 +315,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_menus">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -317,7 +329,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_orders">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -329,7 +343,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_posts">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -341,7 +357,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_tables">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Tables" Type="Self.Tables" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -353,7 +371,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_types_menu">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Types_menu" Type="Self.Types_menu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -365,7 +385,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Id_user_visits">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">

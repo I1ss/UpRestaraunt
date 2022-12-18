@@ -47,8 +47,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -71,8 +73,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\AddCoreToDbCommand.cs" />
     <Compile Include="Commands\AuthorizationCommand.cs" />
     <Compile Include="Commands\BaseTypeCommand.cs" />
+    <Compile Include="Commands\DeleteCoreFromDbCommand.cs" />
+    <Compile Include="Commands\DeleteUserCommand.cs" />
+    <Compile Include="Commands\EditCoreSettingsFromDbCommand.cs" />
+    <Compile Include="Commands\EditUserSettingsCommand.cs" />
     <Compile Include="Commands\RegistrationCommand.cs" />
     <Compile Include="Commands\SwitchToMainPageCommand.cs" />
     <Compile Include="Commands\SwitchToSettingsPageCommand.cs" />
@@ -80,6 +87,9 @@
     <Compile Include="Commands\TryToRegistrationCommand.cs" />
     <Compile Include="Controls\AuthenticationControl.xaml.cs">
       <DependentUpon>AuthenticationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ButtonsControl.xaml.cs">
+      <DependentUpon>ButtonsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MainPageControl.xaml.cs">
       <DependentUpon>MainPageControl.xaml</DependentUpon>
@@ -90,6 +100,7 @@
     <Compile Include="Controls\TabTablesControl.xaml.cs">
       <DependentUpon>TabTablesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\CoreConverters.cs" />
     <Compile Include="Converters\GroupConverter.cs" />
     <Compile Include="Converters\InversionBoolConverter.cs" />
     <Compile Include="Converters\VisibleOrCollapsedConverter.cs" />
@@ -150,6 +161,7 @@
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\MainPageVM.cs" />
     <Compile Include="ViewModels\SettingsUserVM.cs" />
+    <Compile Include="ViewModels\Tables\ClientTableVM.cs" />
     <Compile Include="ViewModels\TabTablesVM.cs" />
     <Compile Include="ViewModels\UpRestarauntVM.cs" />
     <Compile Include="Windows\UpRestarauntWindow.xaml.cs">
@@ -198,6 +210,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ButtonsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MainPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,6 +242,8 @@
       <DependentUpon>BaseModel.edmx</DependentUpon>
       <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Trash.png" />
+    <Resource Include="Resources\Edit.png" />
     <Resource Include="Resources\Main.png" />
     <Resource Include="Resources\Gear.png" />
     <Resource Include="Resources\Table.png" />
