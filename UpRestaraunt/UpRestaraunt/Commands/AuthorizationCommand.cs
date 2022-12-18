@@ -24,8 +24,9 @@
 
             if (userFromDb.Any())
             {
-                MessageBox.Show("Вы успешно авторизовались!", "Авторизация.");
+                authenticationVM.CurrentUser = userFromDb.SingleOrDefault();
                 authenticationVM.IsAuthentication = false;
+                MessageBox.Show("Вы успешно авторизовались!", "Авторизация.");
             }
             else
                 MessageBox.Show("Вы ввели неверный логин или пароль.", "Авторизация, ошибка.");

@@ -1,8 +1,9 @@
 ﻿namespace UpRestaraunt.ViewModels
 {
     using System.ComponentModel;
-    using System.Windows.Input;
+
     using UpRestaraunt.Commands;
+    using UpRestaraunt.Database;
 
     /// <summary>
     /// Вью-модель всего приложения.
@@ -20,6 +21,9 @@
 
         /// <inheritdoc cref="IsAuthentication" />
         private bool _isAuthentication { get; set; }
+
+        /// <inheritdoc cref="CurrentUser" />
+        private Users _currentUser { get; set; }
 
         /// <summary>
         /// Вью-модель контрола аутентификации: авторизации/регистрации.
@@ -106,17 +110,30 @@
         }
 
         /// <summary>
-        /// 
+        /// Текущий авторизованный пользователь.
+        /// </summary>
+        public Users CurrentUser
+        {
+            get { return _currentUser; }
+            set
+            {
+                _currentUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Команда перехода на главную страницу.
         /// </summary>
         public SwitchToMainPageCommand SwitchToMainPageCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Команда перехода на страницу с настройками.
         /// </summary>
         public SwitchToSettingsPageCommand SwitchToSettingsPageCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Команда перехода на страницу с таблицами.
         /// </summary>
         public SwitchToTablesPageCommand SwitchToTablesPageCommand { get; set; }
 
@@ -129,6 +146,8 @@
             MainPageVM = new MainPageVM();
             SettingsUserVM = new SettingsUserVM();
             TabTablesVM = new TabTablesVM();
+
+            CurrentUser = new Users();
             IsAuthentication = true;
 
             SwitchToMainPageCommand = new SwitchToMainPageCommand();
@@ -136,6 +155,25 @@
             SwitchToTablesPageCommand = new SwitchToTablesPageCommand();
 
             AuthenticationVM.PropertyChanged += AuthenticationVmPropertyChanged;
+            SettingsUserVM.PropertyChanged += SettingsUserVmPropertyChanged;
+        }
+
+        /// <summary>
+        /// Событие изменения состояния вью-модели аутентификации.
+        /// </summary>
+        /// <param name="settingsUserVM"> Вью-модель настроек пользователя. </param>
+        /// <param name="propertyChanged"> Изменившееся свойство. </param>
+        private void SettingsUserVmPropertyChanged(object settingsUserVM, PropertyChangedEventArgs propertyChanged)
+        {
+            var currentUser = (settingsUserVM as SettingsUserVM).CurrentUser;
+            if (currentUser == null)
+            {
+                AuthenticationVM.IsAuthentication = true;
+                IsAuthentication = true;
+                IsMainPage = false;
+                IsSettingsPage = false;
+                IsTablesPage = false;
+            }
         }
 
         /// <summary>
@@ -147,6 +185,14 @@
         {
             IsMainPage = !(authenticationVM as AuthenticationVM).IsAuthentication;
             IsAuthentication = (authenticationVM as AuthenticationVM).IsAuthentication;
+
+            if (!IsAuthentication)
+            {
+                var currentUser = (authenticationVM as AuthenticationVM).CurrentUser;
+                CurrentUser = currentUser;
+                SettingsUserVM.CurrentUser = currentUser;
+                TabTablesVM.CurrentUser = currentUser;
+            }
         }
     }
 }

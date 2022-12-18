@@ -72,11 +72,11 @@
                 </Button>
             </Grid>
             <Grid Grid.Column="1">
-                <controls:MainPageControl Visibility="{Binding DataContext.IsMainPage, Source={x:Reference UpRestaraunt}, 
+                <controls:MainPageControl DataContext="{Binding MainPageVM}" Visibility="{Binding DataContext.IsMainPage, Source={x:Reference UpRestaraunt}, 
                                             Converter={StaticResource VisibleOrCollapsedConverter}}"/>
-                <controls:TabTablesControl Visibility="{Binding DataContext.IsTablesPage, Source={x:Reference UpRestaraunt}, 
+                <controls:TabTablesControl DataContext="{Binding TabTablesVM}" Visibility="{Binding DataContext.IsTablesPage, Source={x:Reference UpRestaraunt}, 
                                             Converter={StaticResource VisibleOrCollapsedConverter}}"/>
-                <controls:SettingsUserControl Visibility="{Binding DataContext.IsSettingsPage, Source={x:Reference UpRestaraunt}, 
+                <controls:SettingsUserControl DataContext="{Binding SettingsUserVM}" Visibility="{Binding DataContext.IsSettingsPage, Source={x:Reference UpRestaraunt}, 
                                             Converter={StaticResource VisibleOrCollapsedConverter}}"/>
             </Grid>
         </Grid>

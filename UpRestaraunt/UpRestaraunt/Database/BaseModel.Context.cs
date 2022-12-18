@@ -17,17 +17,17 @@ namespace UpRestaraunt.Database
     {
         private static RestaurantEntities _context { get; set; }
 
+        public RestaurantEntities()
+            : base("name=RestaurantEntities")
+        {
+        }
+
         public static RestaurantEntities GetContext()
         {
             if (_context == null)
                 _context = new RestaurantEntities();
 
             return _context;
-        }
-
-        public RestaurantEntities()
-            : base("name=RestaurantEntities")
-        {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

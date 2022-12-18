@@ -7,19 +7,99 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TabControl Margin="25" >
-            <TabItem Header="Клиенты" />
-            <TabItem Header="Блюда" />
-            <TabItem Header="Блюда в заказе" />
-            <TabItem Header="Работники" />
-            <TabItem Header="Залы" />
-            <TabItem Header="Меню" />
-            <TabItem Header="Заказы" />
-            <TabItem Header="Должности" />
-            <TabItem Header="Столики" />
-            <TabItem Header="Типы меню" />
-            <TabItem Header="Посещения" />
-            <TabItem Header="Пользователи" />
+        <Grid.Background>
+            <SolidColorBrush Color="Black" Opacity="0.75" />
+        </Grid.Background>
+        <TabControl Margin="15 25" >
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Panel" BorderThickness="1 1 1 1" BorderBrush="#B4B4B4">
+                                    <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                                              ContentSource="Header" Margin="10, 2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="White" />
+                                        <Setter Property="Foreground" Value="#B4B4B4" />
+                                        <Setter Property="HeaderTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{TemplateBinding Content}" />
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="BorderBrush" Value="#3000ff" />
+                                        <Setter TargetName="Panel" Property="Background" Value="#9999ff" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Клиенты" DataContext="{Binding ClientTableVM}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                    <Grid Grid.Row="1" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="15" Text="{Binding LastName}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="15" Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="15" Text="{Binding MiddleName}" Grid.Row="0" Grid.Column="2" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="15" Text="{Binding Address}" Grid.Row="0" Grid.Column="3" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="15" Text="{Binding NumberPhone}" Grid.Row="1" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="15" Text="{Binding CountOrders}" Grid.Row="1" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="15" Text="{Binding IdVisit}" Grid.Row="1" Grid.Column="2" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="2" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Блюда" >
+            </TabItem>
+            <TabItem Header="Блюда в заказе" >
+            </TabItem>
+            <TabItem Header="Работники" >
+            </TabItem>
+            <TabItem Header="Залы" >
+            </TabItem>
+            <TabItem Header="Меню" >
+            </TabItem>
+            <TabItem Header="Заказы" >
+            </TabItem>
+            <TabItem Header="Должности" >
+            </TabItem>
+            <TabItem Header="Столики" >
+            </TabItem>
+            <TabItem Header="Типы меню" >
+            </TabItem>
+            <TabItem Header="Посещения" >
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>
