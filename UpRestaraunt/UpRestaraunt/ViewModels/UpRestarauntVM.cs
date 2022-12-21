@@ -192,6 +192,7 @@
                 CurrentUser = currentUser;
                 SettingsUserVM.CurrentUser = currentUser;
                 TabTablesVM.CurrentUser = currentUser;
+                SwitchToTablesPageCommand.IsUploadTables = true;
             }
         }
     }

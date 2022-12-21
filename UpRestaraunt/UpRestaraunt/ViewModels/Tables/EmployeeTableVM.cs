@@ -8,7 +8,7 @@
     /// <summary>
     /// Вью-модель таблицы с клиентами.
     /// </summary>
-    public class ClientTableVM : BaseVM
+    public class EmployeeTableVM : BaseVM
     {
         /// <inheritdoc cref="SelectedRow" />
         private DataRowView _selectedRow { get; set; }
@@ -16,8 +16,8 @@
         /// <inheritdoc cref="CurrentUser" />
         private Users _currentUser { get; set; }
 
-        /// <inheritdoc cref="ClientsTable" />
-        private DataTable _clientsTable { get; set; }
+        /// <inheritdoc cref="EmployeeTable" />
+        private DataTable _employeeTable { get; set; }
 
         /// <inheritdoc cref="LastName" />
         private string _lastName { get; set; }
@@ -34,11 +34,8 @@
         /// <inheritdoc cref="NumberPhone" />
         private string _numberPhone { get; set; }
 
-        /// <inheritdoc cref="CountOrders" />
-        private string _countOrders { get; set; }
-
-        /// <inheritdoc cref="IdVisit" />
-        private int _idVisit { get; set; }
+        /// <inheritdoc cref="IdPost" />
+        private int _idPost { get; set; }
 
         /// <inheritdoc cref="Filter" />
         private string _filter { get; set; }
@@ -54,10 +51,10 @@
                 _filter = value;
                 OnPropertyChanged();
 
-                if (ClientsTable.Rows.Count != 0 && Filter != string.Empty)
-                    ClientsTable.DefaultView.RowFilter = $"{nameof(SelectedClient.Last_name)} = '{Filter}'";
+                if (EmployeeTable.Rows.Count != 0 && Filter != string.Empty)
+                    EmployeeTable.DefaultView.RowFilter = $"{nameof(SelectedEmployee.Last_name)} = '{Filter}'";
                 else
-                    ClientsTable.DefaultView.RowFilter = string.Empty;
+                    EmployeeTable.DefaultView.RowFilter = string.Empty;
             }
         }
 
@@ -75,14 +72,14 @@
         }
 
         /// <summary>
-        /// Выбранный пользователь.
+        /// Выбранный работник.
         /// </summary>
-        public Clients SelectedClient { get; set; }
+        public Employees SelectedEmployee { get; set; }
 
         /// <summary>
         /// Представление таблицы.
         /// </summary>
-        public DataView DataView => ClientsTable.DefaultView;
+        public DataView DataView => EmployeeTable.DefaultView;
 
         /// <summary>
         /// Выбранная строка в таблице.
@@ -98,31 +95,30 @@
                 _selectedRow = value;
                 OnPropertyChanged();
 
-                SelectedClient.ConvertToCoreDbFromRow(ClientsTable, SelectedRow);
-                OnPropertyChanged(nameof(SelectedClient));
+                SelectedEmployee.ConvertToCoreDbFromRow(EmployeeTable, SelectedRow);
+                OnPropertyChanged(nameof(SelectedEmployee));
 
-                LastName = SelectedClient.Last_name;
-                FirstName = SelectedClient.First_name;
-                MiddleName = SelectedClient.Middle_name;
-                Address = SelectedClient.Address;
-                NumberPhone = SelectedClient.Number_phone;
-                CountOrders = SelectedClient.Count_orders;
-                IdVisit = SelectedClient.Id_visit is int selectedClientIdVisit ? selectedClientIdVisit : 0;
+                LastName = SelectedEmployee.Last_name;
+                FirstName = SelectedEmployee.First_name;
+                MiddleName = SelectedEmployee.Middle_name;
+                Address = SelectedEmployee.Address;
+                NumberPhone = SelectedEmployee.Number_phone;
+                IdPost = SelectedEmployee.Id_post is int selectedEmployeeIdPost ? selectedEmployeeIdPost : 0;
             }
         }
 
         /// <summary>
-        /// Табличное представление информации о клиентах.
+        /// Табличное представление информации о работниках.
         /// </summary>
-        public DataTable ClientsTable
+        public DataTable EmployeeTable
         {
-            get 
-            { 
-                return _clientsTable;
+            get
+            {
+                return _employeeTable;
             }
             set
             {
-                _clientsTable = value;
+                _employeeTable = value;
 
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(DataView));
@@ -210,33 +206,17 @@
         }
 
         /// <summary>
-        /// Отображаемое значение количества заказов в таблице.
+        /// Отображаемое значение id должности в таблице.
         /// </summary>
-        public string CountOrders
+        public int IdPost
         {
             get
             {
-                return _countOrders;
+                return _idPost;
             }
             set
             {
-                _countOrders = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// Отображаемое значение id посещения в таблице.
-        /// </summary>
-        public int IdVisit
-        {
-            get
-            {
-                return _idVisit;
-            }
-            set
-            {
-                _idVisit = value;
+                _idPost = value;
                 OnPropertyChanged();
             }
         }
@@ -244,30 +224,30 @@
         /// <summary>
         /// Команда для изменения записи о клиенте.
         /// </summary>
-        public EditCoreSettingsFromDbCommand<ClientTableVM> EditCoreSettingsFromDbCommand { get; set; }
+        public EditCoreSettingsFromDbCommand<EmployeeTableVM> EditCoreSettingsFromDbCommand { get; set; }
 
         /// <summary>
         /// Команда для удаления клиента.
         /// </summary>
-        public DeleteCoreFromDbCommand<ClientTableVM> DeleteCoreFromDbCommand { get; set; }
+        public DeleteCoreFromDbCommand<EmployeeTableVM> DeleteCoreFromDbCommand { get; set; }
 
         /// <summary>
         /// Команда для добавления клиента.
         /// </summary>
-        public AddCoreToDbCommand<ClientTableVM> AddCoreToDbCommand { get; set; }
+        public AddCoreToDbCommand<EmployeeTableVM> AddCoreToDbCommand { get; set; }
 
         /// <summary>
         /// Конструктор вью-модели таблицы с клиентами.
         /// </summary>
-        public ClientTableVM()
+        public EmployeeTableVM()
         {
             CurrentUser = new Users();
-            SelectedClient = new Clients();
-            ClientsTable = new DataTable();
+            SelectedEmployee = new Employees();
+            EmployeeTable = new DataTable();
 
-            EditCoreSettingsFromDbCommand = new EditCoreSettingsFromDbCommand<ClientTableVM>();
-            DeleteCoreFromDbCommand = new DeleteCoreFromDbCommand<ClientTableVM>();
-            AddCoreToDbCommand = new AddCoreToDbCommand<ClientTableVM>();
+            EditCoreSettingsFromDbCommand = new EditCoreSettingsFromDbCommand<EmployeeTableVM>();
+            DeleteCoreFromDbCommand = new DeleteCoreFromDbCommand<EmployeeTableVM>();
+            AddCoreToDbCommand = new AddCoreToDbCommand<EmployeeTableVM>();
         }
     }
 }

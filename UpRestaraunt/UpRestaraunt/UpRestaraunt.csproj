@@ -162,6 +162,16 @@
     <Compile Include="ViewModels\MainPageVM.cs" />
     <Compile Include="ViewModels\SettingsUserVM.cs" />
     <Compile Include="ViewModels\Tables\ClientTableVM.cs" />
+    <Compile Include="ViewModels\Tables\DishesInOrderTableVM.cs" />
+    <Compile Include="ViewModels\Tables\DishesTableVM.cs" />
+    <Compile Include="ViewModels\Tables\EmployeeTableVM.cs" />
+    <Compile Include="ViewModels\Tables\HallsTableVM.cs" />
+    <Compile Include="ViewModels\Tables\MenuTableVM.cs" />
+    <Compile Include="ViewModels\Tables\OrdersTableVM.cs" />
+    <Compile Include="ViewModels\Tables\PostsTableVM.cs" />
+    <Compile Include="ViewModels\Tables\TablesTableVM.cs" />
+    <Compile Include="ViewModels\Tables\TypesMenuTableVM.cs" />
+    <Compile Include="ViewModels\Tables\VisitsTableVM.cs" />
     <Compile Include="ViewModels\TabTablesVM.cs" />
     <Compile Include="ViewModels\UpRestarauntVM.cs" />
     <Compile Include="Windows\UpRestarauntWindow.xaml.cs">
