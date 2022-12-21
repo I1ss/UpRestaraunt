@@ -45,13 +45,37 @@
             <TabItem Header="Клиенты" DataContext="{Binding ClientTableVM}" >
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="3*" />
                         <RowDefinition Height="2*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <DataGrid Grid.Row="0" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchClientBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь фамилию клиента для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchClientBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
                               SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
-                    <Grid Grid.Row="1" Background="LightGray" >
+                    <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
@@ -62,43 +86,558 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBox Margin="15" Text="{Binding LastName}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                        <TextBox Margin="5" Text="{Binding LastName}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
-                        <TextBox Margin="15" Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                        <TextBox Margin="5" Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
-                        <TextBox Margin="15" Text="{Binding MiddleName}" Grid.Row="0" Grid.Column="2" FontSize="16" MaxLength="16" 
+                        <TextBox Margin="5" Text="{Binding MiddleName}" Grid.Row="0" Grid.Column="2" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
-                        <TextBox Margin="15" Text="{Binding Address}" Grid.Row="0" Grid.Column="3" FontSize="16" MaxLength="16" 
+                        <TextBox Margin="5" Text="{Binding Address}" Grid.Row="0" Grid.Column="3" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
-                        <TextBox Margin="15" Text="{Binding NumberPhone}" Grid.Row="1" Grid.Column="0" FontSize="16" MaxLength="16" 
+                        <TextBox Margin="5" Text="{Binding NumberPhone}" Grid.Row="1" Grid.Column="0" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
-                        <TextBox Margin="15" Text="{Binding CountOrders}" Grid.Row="1" Grid.Column="1" FontSize="16" MaxLength="16" 
+                        <TextBox Margin="5" Text="{Binding CountOrders}" Grid.Row="1" Grid.Column="1" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
-                        <TextBox Margin="15" Text="{Binding IdVisit}" Grid.Row="1" Grid.Column="2" FontSize="16" MaxLength="16" 
+                        <TextBox Margin="5" Text="{Binding IdVisit}" Grid.Row="1" Grid.Column="2" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
                     </Grid>
-                    <local:ButtonsControl Grid.Row="2" DataContext="{Binding }" Background="LightGray" />
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Блюда" >
+            <TabItem Header="Блюда" DataContext="{Binding DishesTableVM}"  >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchDishBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь название блюда для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchDishBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding Title}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding TimeCooking}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding Price}" Grid.Row="0" Grid.Column="2" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding IdMenu}" Grid.Row="0" Grid.Column="3" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
             </TabItem>
-            <TabItem Header="Блюда в заказе" >
+            <TabItem Header="Блюда в заказе" DataContext="{Binding DishesInOrderTableVM}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchDishInOrderBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь Id заказа для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchDishInOrderBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding IdOrder}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding IdDish}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
             </TabItem>
-            <TabItem Header="Работники" >
+            <TabItem Header="Работники" DataContext="{Binding EmployeeTableVM}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchEmployeeBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь фамилию работника для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchEmployeeBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding LastName}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding MiddleName}" Grid.Row="0" Grid.Column="2" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding Address}" Grid.Row="0" Grid.Column="3" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding NumberPhone}" Grid.Row="1" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding IdPost}" Grid.Row="1" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
             </TabItem>
-            <TabItem Header="Залы" >
+            <TabItem Header="Залы" DataContext="{Binding HallsTableVM}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchHallBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь количество мест в зале для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchHallBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding CountPlaces}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <CheckBox Margin="5" IsChecked="{Binding ReadyToWork}" Grid.Row="0" Grid.Column="1"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
             </TabItem>
-            <TabItem Header="Меню" >
+            <TabItem Header="Меню" DataContext="{Binding MenuTableVM}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchMenuBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь Id типа меню для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchMenuBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding IdTypeMenu}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding IdHall}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
             </TabItem>
-            <TabItem Header="Заказы" >
+            <TabItem Header="Заказы" DataContext="{Binding OrdersTableVM}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchOrderBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь Id посещения для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchOrderBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding Price}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding IdVisit}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
             </TabItem>
-            <TabItem Header="Должности" >
+            <TabItem Header="Должности" DataContext="{Binding PostsTableVM}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchPostBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь название должности для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchPostBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding Salary}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding Title}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
             </TabItem>
-            <TabItem Header="Столики" >
+            <TabItem Header="Столики" DataContext="{Binding TablesTableVM}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchTableBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь Id зала для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchTableBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding IdHall}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
             </TabItem>
-            <TabItem Header="Типы меню" >
+            <TabItem Header="Типы меню" DataContext="{Binding TypesMenuTableVM}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchTypeMenuBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь название меню для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchTypeMenuBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding CountDishes}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding Title}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
             </TabItem>
-            <TabItem Header="Посещения" >
+            <TabItem Header="Посещения" DataContext="{Binding VisitsTableVM}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchVisitsBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь Id клиента для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchVisitsBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" >
+                    </DataGrid>
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding TimeVisit}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding IdClient}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding IdEmployee}" Grid.Row="0" Grid.Column="2" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding IdTable}" Grid.Row="0" Grid.Column="3" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
