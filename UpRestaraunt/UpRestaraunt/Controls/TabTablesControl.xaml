@@ -10,7 +10,19 @@
         <Grid.Background>
             <SolidColorBrush Color="Black" Opacity="0.75" />
         </Grid.Background>
-        <TabControl Margin="15 25" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="14*" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Margin="15 10 15 0" Background="DeepSkyBlue" Foreground="White" MaxHeight="48" FontSize="18" 
+                BorderThickness="0" Content="Сгенерировать отчёт" Command="{Binding GenerateReportCommand}" CommandParameter="{Binding }" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TabControl Margin="15 10" Grid.Row="1" >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">

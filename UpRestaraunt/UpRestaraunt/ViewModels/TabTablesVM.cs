@@ -1,5 +1,6 @@
 ﻿namespace UpRestaraunt.ViewModels
 {
+    using UpRestaraunt.Commands;
     using UpRestaraunt.Database;
     using UpRestaraunt.ViewModels.Tables;
 
@@ -95,6 +96,11 @@
         public VisitsTableVM VisitsTableVM { get; set; }
 
         /// <summary>
+        /// Команда для генерации отчёта.
+        /// </summary>
+        public GenerateReportCommand GenerateReportCommand { get; set; }
+
+        /// <summary>
         /// Создать вью-модель страницы с таблицами.
         /// </summary>
         public TabTablesVM()
@@ -110,6 +116,7 @@
             TablesTableVM = new TablesTableVM();
             TypesMenuTableVM = new TypesMenuTableVM();
             VisitsTableVM = new VisitsTableVM();
+            GenerateReportCommand = new GenerateReportCommand();
 
             CurrentUser = new Users();
         }
