@@ -39,6 +39,7 @@
         <AssociationConnector Association="RestaurantModel.FK_Id_user_posts" />
         <AssociationConnector Association="RestaurantModel.FK_Id_user_tables" />
         <AssociationConnector Association="RestaurantModel.FK_Id_user_types_menu" />
+        <AssociationConnector Association="RestaurantModel.FK_Id_visit_clients" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

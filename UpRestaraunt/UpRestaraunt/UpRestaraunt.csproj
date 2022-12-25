@@ -178,6 +178,7 @@
     <Compile Include="ViewModels\Tables\PostsTableVM.cs" />
     <Compile Include="ViewModels\Tables\TablesTableVM.cs" />
     <Compile Include="ViewModels\Tables\TypesMenuTableVM.cs" />
+    <Compile Include="ViewModels\Tables\UsersTableVM.cs" />
     <Compile Include="ViewModels\Tables\VisitsTableVM.cs" />
     <Compile Include="ViewModels\TabTablesVM.cs" />
     <Compile Include="ViewModels\UpRestarauntVM.cs" />

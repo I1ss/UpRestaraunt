@@ -22,10 +22,10 @@
         private DataTable _menuTable { get; set; }
 
         /// <inheritdoc cref="IdTypeMenu" />
-        private int _idTypeMenu { get; set; }
+        private int? _idTypeMenu { get; set; }
 
         /// <inheritdoc cref="IdHall" />
-        private int _idHall { get; set; }
+        private int? _idHall { get; set; }
 
         /// <inheritdoc cref="Filter" />
         private string _filter { get; set; }
@@ -91,8 +91,8 @@
                 SelectedMenu.ConvertToCoreDbFromRow(MenuTable, SelectedRow);
                 OnPropertyChanged(nameof(SelectedMenu));
 
-                IdTypeMenu = SelectedMenu.Id_type_menu is int selectedIdTypeMenu ? selectedIdTypeMenu : 0; ;
-                IdHall = SelectedMenu.Id_hall is int selectedIdHall ? selectedIdHall : 0; ;
+                IdTypeMenu = SelectedMenu.Id_type_menu;
+                IdHall = SelectedMenu.Id_hall;
             }
         }
 
@@ -117,7 +117,7 @@
         /// <summary>
         /// Отображаемое значение id типа меню в таблице.
         /// </summary>
-        public int IdTypeMenu
+        public int? IdTypeMenu
         {
             get
             {
@@ -133,7 +133,7 @@
         /// <summary>
         /// Отображаемое значение id зала в таблице.
         /// </summary>
-        public int IdHall
+        public int? IdHall
         {
             get
             {

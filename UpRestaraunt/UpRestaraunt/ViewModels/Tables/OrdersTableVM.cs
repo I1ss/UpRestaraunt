@@ -25,7 +25,7 @@
         private int _price { get; set; }
 
         /// <inheritdoc cref="IdVisit" />
-        private int _idVisit { get; set; }
+        private int? _idVisit { get; set; }
 
         /// <inheritdoc cref="Filter" />
         private string _filter { get; set; }
@@ -92,7 +92,7 @@
                 OnPropertyChanged(nameof(SelectedOrder));
 
                 Price = SelectedOrder.Price;
-                IdVisit = SelectedOrder.Id_visit is int selectedIdVisit ? selectedIdVisit : 0;
+                IdVisit = SelectedOrder.Id_visit;
             }
         }
 
@@ -133,7 +133,7 @@
         /// <summary>
         /// Отображаемое значение id посещения в таблице.
         /// </summary>
-        public int IdVisit
+        public int? IdVisit
         {
             get
             {

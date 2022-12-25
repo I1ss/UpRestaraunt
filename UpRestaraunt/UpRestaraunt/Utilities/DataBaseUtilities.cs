@@ -26,5 +26,15 @@
         {
             return $"SELECT * FROM {tableName} WHERE {column} = {idUser}";
         }
+
+        /// <summary>
+        /// Метод возвращает простейший запрос, который возвращает запрос на получение всех значений из таблицы.
+        /// </summary>
+        /// <param name="tableName"> Имя таблицы. </param>
+        /// <returns> Запрос на получение значений из таблицы для конкретного пользователя. </returns>
+        public static string BuildSqlSelectAdminRequest(string tableName)
+        {
+            return $"SELECT * FROM {tableName}";
+        }
     }
 }

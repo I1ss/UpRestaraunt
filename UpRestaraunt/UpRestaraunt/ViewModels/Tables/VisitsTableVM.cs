@@ -30,13 +30,13 @@
         private DateTime _timeVisit { get; set; }
 
         /// <inheritdoc cref="IdClient" />
-        private int _idClient { get; set; }
+        private int? _idClient { get; set; }
 
         /// <inheritdoc cref="IdEmployee" />
-        private int _idEmployee { get; set; }
+        private int? _idEmployee { get; set; }
 
         /// <inheritdoc cref="IdTable" />
-        private int _idTable { get; set; }
+        private int? _idTable { get; set; }
 
         /// <inheritdoc cref="Filter" />
         private string _filter { get; set; }
@@ -103,9 +103,9 @@
                 OnPropertyChanged(nameof(SelectedVisit));
 
                 TimeVisit = SelectedVisit.Time_visit;
-                IdClient = SelectedVisit.Id_client is int selectedIdClient ? selectedIdClient : 0;
-                IdEmployee = SelectedVisit.Id_employee is int selectedIdEmployee ? selectedIdEmployee : 0;
-                IdTable = SelectedVisit.Id_table is int selectedIdTable ? selectedIdTable : 0;
+                IdClient = SelectedVisit.Id_client;
+                IdEmployee = SelectedVisit.Id_employee;
+                IdTable = SelectedVisit.Id_table;
             }
         }
 
@@ -146,7 +146,7 @@
         /// <summary>
         /// Отображаемое значение id клиента в таблице.
         /// </summary>
-        public int IdClient
+        public int? IdClient
         {
             get
             {
@@ -162,7 +162,7 @@
         /// <summary>
         /// Отображаемое значение id работника в таблице.
         /// </summary>
-        public int IdEmployee
+        public int? IdEmployee
         {
             get
             {
@@ -178,7 +178,7 @@
         /// <summary>
         /// Отображаемое значение id столика в таблице.
         /// </summary>
-        public int IdTable
+        public int? IdTable
         {
             get
             {
@@ -214,11 +214,12 @@
             CurrentUser = new Users();
             SelectedVisit = new Visits();
             VisitsTable = new DataTable();
-            Filter = string.Empty;
-
             EditCoreSettingsFromDbCommand = new EditCoreSettingsFromDbCommand<VisitsTableVM>();
             DeleteCoreFromDbCommand = new DeleteCoreFromDbCommand<VisitsTableVM>();
             AddCoreToDbCommand = new AddCoreToDbCommand<VisitsTableVM>();
+
+            TimeVisit = DateTime.Now;
+            Filter = string.Empty;
         }
     }
 }

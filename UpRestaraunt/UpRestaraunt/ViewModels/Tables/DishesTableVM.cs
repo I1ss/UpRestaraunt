@@ -30,7 +30,7 @@
         private int _price { get; set; }
 
         /// <inheritdoc cref="IdMenu" />
-        private int _idMenu { get; set; }
+        private int? _idMenu { get; set; }
 
         /// <inheritdoc cref="Filter" />
         private string _filter { get; set; }
@@ -96,7 +96,7 @@
                 Title = SelectedDish.Title;
                 TimeCooking = SelectedDish.Time_cooking;
                 Price = SelectedDish.Price;
-                IdMenu = SelectedDish.Id_menu is int selectedDishIdMenu ? selectedDishIdMenu : 0;
+                IdMenu = SelectedDish.Id_menu;
             }
         }
 
@@ -169,7 +169,7 @@
         /// <summary>
         /// Отображаемое значение id меню в таблице.
         /// </summary>
-        public int IdMenu
+        public int? IdMenu
         {
             get
             {
@@ -205,7 +205,6 @@
             CurrentUser = new Users();
             SelectedDish = new Dishes();
             DishesTable = new DataTable();
-
             EditCoreSettingsFromDbCommand = new EditCoreSettingsFromDbCommand<DishesTableVM>();
             DeleteCoreFromDbCommand = new DeleteCoreFromDbCommand<DishesTableVM>();
             AddCoreToDbCommand = new AddCoreToDbCommand<DishesTableVM>();

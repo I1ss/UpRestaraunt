@@ -45,7 +45,7 @@
 
             foreach (var property in properties)
             {
-                if (!dataTable.Columns.Contains(property) || dataRowView?.Row[property] == DBNull.Value)
+                if (!dataTable.Columns.Contains(property))
                     continue;
 
                 var myFieldInfo = type.GetProperty(property, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);

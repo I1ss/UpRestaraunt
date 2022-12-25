@@ -33,6 +33,11 @@
         private string _idUser;
 
         /// <summary>
+        /// Пользователь это администратор?
+        /// </summary>
+        public bool IsAdmin;
+
+        /// <summary>
         /// Нужно ли обновить таблицы?
         /// </summary>
         public bool IsUploadTables;
@@ -51,6 +56,7 @@
                 return;
 
             IsUploadTables = false;
+            IsAdmin = upRestarauntVM.CurrentUser.Is_admin;
             _propertyName = nameof(upRestarauntVM.CurrentUser.Id_user);
             _idUser = upRestarauntVM.CurrentUser.Id_user.ToString();
             _context = RestaurantEntities.GetContext();
@@ -68,6 +74,7 @@
             upRestarauntVM.TabTablesVM.TablesTableVM.TabTable = GetUpdatedTable(nameof(_context.Tables));
             upRestarauntVM.TabTablesVM.TypesMenuTableVM.TypeMenuTable = GetUpdatedTable(nameof(_context.Types_menu));
             upRestarauntVM.TabTablesVM.VisitsTableVM.VisitsTable = GetUpdatedTable(nameof(_context.Visits));
+            upRestarauntVM.TabTablesVM.UsersTableVM.UsersTable = GetUpdatedTable(nameof(_context.Users));
 
             _sqlConnection.Close();
         }
@@ -78,11 +85,21 @@
         /// <param name="table"> Обновляемая таблица. </param>
         private DataTable GetUpdatedTable(string table)
         {
+            var commandRequest = string.Empty;
+
+            if (!IsAdmin)
+                commandRequest = DataBaseUtilities.BuildSqlSelectRequest(table, _propertyName, _idUser);
+            else
+                commandRequest = DataBaseUtilities.BuildSqlSelectAdminRequest(table);
+
+            var sqlCommand = new SqlCommand(commandRequest, _sqlConnection);
             var dataTable = new DataTable();
-            SqlCommand sqlCommand = new SqlCommand(DataBaseUtilities.BuildSqlSelectRequest(table, _propertyName, _idUser), _sqlConnection);
             SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
             dataAdapter.Fill(dataTable);
-            dataTable.Columns.Remove(_propertyName);
+
+            if (!IsAdmin)
+                dataTable.Columns.Remove(_propertyName);
+
             return dataTable;
         }
 

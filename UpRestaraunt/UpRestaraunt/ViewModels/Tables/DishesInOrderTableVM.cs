@@ -22,10 +22,10 @@
         private DataTable _dishesTable { get; set; }
 
         /// <inheritdoc cref="IdOrder" />
-        private int _idOrder { get; set; }
+        private int? _idOrder { get; set; }
 
         /// <inheritdoc cref="IdDish" />
-        private int _idDish { get; set; }
+        private int? _idDish { get; set; }
 
         /// <inheritdoc cref="Filter" />
         private string _filter { get; set; }
@@ -91,8 +91,8 @@
                 SelectedDishInOrder.ConvertToCoreDbFromRow(DishesInOrderTable, SelectedRow);
                 OnPropertyChanged(nameof(SelectedDishInOrder));
 
-                IdOrder = SelectedDishInOrder.Id_order is int selectedDishOrderId ? selectedDishOrderId : 0;
-                IdDish = SelectedDishInOrder.Id_dish is int selectedDishId ? selectedDishId : 0;
+                IdOrder = SelectedDishInOrder.Id_order;
+                IdDish = SelectedDishInOrder.Id_dish;
             }
         }
 
@@ -117,7 +117,7 @@
         /// <summary>
         /// Отображаемое значение id блюда в таблице.
         /// </summary>
-        public int IdDish
+        public int? IdDish
         {
             get
             {
@@ -133,7 +133,7 @@
         /// <summary>
         /// Отображаемое значение id заказа в таблице.
         /// </summary>
-        public int IdOrder
+        public int? IdOrder
         {
             get
             {

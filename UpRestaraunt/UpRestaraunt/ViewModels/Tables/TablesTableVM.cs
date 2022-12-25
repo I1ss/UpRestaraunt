@@ -22,7 +22,7 @@
         private DataTable _tabTable { get; set; }
 
         /// <inheritdoc cref="IdHall" />
-        private int _idHall { get; set; }
+        private int? _idHall { get; set; }
 
         /// <inheritdoc cref="Filter" />
         private string _filter { get; set; }
@@ -88,7 +88,7 @@
                 SelectedTable.ConvertToCoreDbFromRow(TabTable, SelectedRow);
                 OnPropertyChanged(nameof(SelectedTable));
 
-                IdHall = SelectedTable.Id_hall is int selectedIdHall ? selectedIdHall : 0;
+                IdHall = SelectedTable.Id_hall;
             }
         }
 
@@ -113,7 +113,7 @@
         /// <summary>
         /// Отображаемое значение id зала в таблице.
         /// </summary>
-        public int IdHall
+        public int? IdHall
         {
             get
             {
