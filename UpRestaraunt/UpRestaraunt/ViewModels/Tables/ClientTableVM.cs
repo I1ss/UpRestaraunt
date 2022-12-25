@@ -38,7 +38,7 @@
         private string _countOrders { get; set; }
 
         /// <inheritdoc cref="IdVisit" />
-        private int _idVisit { get; set; }
+        private int? _idVisit { get; set; }
 
         /// <inheritdoc cref="Filter" />
         private string _filter { get; set; }
@@ -107,7 +107,7 @@
                 Address = SelectedClient.Address;
                 NumberPhone = SelectedClient.Number_phone;
                 CountOrders = SelectedClient.Count_orders;
-                IdVisit = SelectedClient.Id_visit is int selectedClientIdVisit ? selectedClientIdVisit : 0;
+                IdVisit = SelectedClient.Id_visit;
             }
         }
 
@@ -228,7 +228,7 @@
         /// <summary>
         /// Отображаемое значение id посещения в таблице.
         /// </summary>
-        public int IdVisit
+        public int? IdVisit
         {
             get
             {

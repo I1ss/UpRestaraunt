@@ -112,6 +112,7 @@
           <Property Name="Id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Is_admin" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Visits">
           <Key>
@@ -410,6 +411,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Id_visit_clients">
+          <End Role="Visits" Type="Self.Visits" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visits">
+              <PropertyRef Name="Id_visit" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="Id_visit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище RestaurantModelContainer">
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dishes" EntityType="Self.Dishes" Schema="dbo" store:Type="Tables" />
@@ -511,6 +524,10 @@
             <End Role="Visits" EntitySet="Visits" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
+          <AssociationSet Name="FK_Id_visit_clients" Association="Self.FK_Id_visit_clients">
+            <End Role="Visits" EntitySet="Visits" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -531,6 +548,7 @@
           <NavigationProperty Name="Visits" Relationship="Self.FK_Id_client" FromRole="Clients" ToRole="Visits" />
           <Property Name="Id_user" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user_clients" FromRole="Clients" ToRole="Users" />
+          <NavigationProperty Name="Visits1" Relationship="RestaurantModel.FK_Id_visit_clients" FromRole="Clients" ToRole="Visits" />
         </EntityType>
         <EntityType Name="Dishes">
           <Key>
@@ -662,6 +680,7 @@
           <NavigationProperty Name="Posts" Relationship="RestaurantModel.FK_Id_user_posts" FromRole="Users" ToRole="Posts" />
           <NavigationProperty Name="Tables" Relationship="RestaurantModel.FK_Id_user_tables" FromRole="Users" ToRole="Tables" />
           <NavigationProperty Name="Types_menu" Relationship="RestaurantModel.FK_Id_user_types_menu" FromRole="Users" ToRole="Types_menu" />
+          <Property Name="Is_admin" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Visits">
           <Key>
@@ -678,6 +697,7 @@
           <NavigationProperty Name="Tables" Relationship="Self.FK_Id_table" FromRole="Visits" ToRole="Tables" />
           <Property Name="Id_user" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="RestaurantModel.FK_Id_user" FromRole="Visits" ToRole="Users" />
+          <NavigationProperty Name="Clients1" Relationship="RestaurantModel.FK_Id_visit_clients" FromRole="Visits" ToRole="Clients" />
         </EntityType>
         <Association Name="FK_Id_client">
           <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
@@ -912,6 +932,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Types_menu" EntitySet="Types_menu" />
           </AssociationSet>
+          <AssociationSet Name="FK_Id_visit_clients" Association="RestaurantModel.FK_Id_visit_clients">
+            <End Role="Visits" EntitySet="Visits" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Id_user">
           <End Type="RestaurantModel.Users" Role="Users" Multiplicity="0..1" />
@@ -1045,6 +1069,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Id_visit_clients">
+          <End Type="RestaurantModel.Visits" Role="Visits" Multiplicity="0..1" />
+          <End Type="RestaurantModel.Clients" Role="Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visits">
+              <PropertyRef Name="Id_visit" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="Id_visit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1164,6 +1200,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="RestaurantModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Is_admin" ColumnName="Is_admin" />
                 <ScalarProperty Name="Id_user" ColumnName="Id_user" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

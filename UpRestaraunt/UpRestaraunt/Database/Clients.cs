@@ -33,5 +33,6 @@ namespace UpRestaraunt.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visits> Visits { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Visits Visits1 { get; set; }
     }
 }

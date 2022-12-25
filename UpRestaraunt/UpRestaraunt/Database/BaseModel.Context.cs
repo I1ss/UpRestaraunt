@@ -15,12 +15,7 @@ namespace UpRestaraunt.Database
     
     public partial class RestaurantEntities : DbContext
     {
-        private static RestaurantEntities _context { get; set; }
-
-        public RestaurantEntities()
-            : base("name=RestaurantEntities")
-        {
-        }
+        private static RestaurantEntities _context;
 
         public static RestaurantEntities GetContext()
         {
@@ -28,6 +23,11 @@ namespace UpRestaraunt.Database
                 _context = new RestaurantEntities();
 
             return _context;
+        }
+
+        public RestaurantEntities()
+            : base("name=RestaurantEntities")
+        {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:UpRestaraunt.Controls"
+             xmlns:local="clr-namespace:UpRestaraunt.Controls" xmlns:converters="clr-namespace:UpRestaraunt.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:VisibleOrCollapsedConverter x:Key="VisibleOrCollapsedConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="Black" Opacity="0.75" />
@@ -22,7 +25,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TabControl Margin="15 10" Grid.Row="1" >
+        <TabControl Margin="15 10" Grid.Row="1" Padding="0" >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -646,6 +649,64 @@
                         <TextBox Margin="5" Text="{Binding IdEmployee}" Grid.Row="0" Grid.Column="2" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
                         <TextBox Margin="5" Text="{Binding IdTable}" Grid.Row="0" Grid.Column="3" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                    </Grid>
+                    <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Пользователи" DataContext="{Binding UsersTableVM}" Visibility="{Binding CurrentUser.Is_admin,
+                Converter={StaticResource VisibleOrCollapsedConverter}}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Background="LightGray">
+                        <TextBox Margin="15" FontSize="16" MaxLength="16" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" x:Name="SearchUsersBox" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False" Text="Введите здесь Id пользователя для поиска" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" Margin="20 0 0 0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchUsersBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" >
+                    </DataGrid>
+                    <Grid Grid.Row="2" Background="LightGray" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5" Text="{Binding IdUser}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding Login}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding Password}" Grid.Row="0" Grid.Column="2" FontSize="16" MaxLength="16" 
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                        <TextBox Margin="5" Text="{Binding IsAdmin}" Grid.Row="0" Grid.Column="3" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
                     </Grid>
                     <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />

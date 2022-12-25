@@ -18,6 +18,7 @@ namespace UpRestaraunt.Database
         public Visits()
         {
             this.Orders = new HashSet<Orders>();
+            this.Clients1 = new HashSet<Clients>();
         }
     
         public int Id_visit { get; set; }
@@ -33,5 +34,7 @@ namespace UpRestaraunt.Database
         public virtual ICollection<Orders> Orders { get; set; }
         public virtual Tables Tables { get; set; }
         public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Clients> Clients1 { get; set; }
     }
 }

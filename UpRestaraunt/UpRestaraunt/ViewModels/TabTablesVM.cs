@@ -37,6 +37,7 @@
                 TablesTableVM.CurrentUser = value;
                 TypesMenuTableVM.CurrentUser = value;
                 VisitsTableVM.CurrentUser = value;
+                UsersTableVM.CurrentUser = value;
             }
         }
 
@@ -96,6 +97,11 @@
         public VisitsTableVM VisitsTableVM { get; set; }
 
         /// <summary>
+        /// Вью-модель таблицы с посещениями.
+        /// </summary>
+        public UsersTableVM UsersTableVM { get; set; }
+
+        /// <summary>
         /// Команда для генерации отчёта.
         /// </summary>
         public GenerateReportCommand GenerateReportCommand { get; set; }
@@ -116,6 +122,7 @@
             TablesTableVM = new TablesTableVM();
             TypesMenuTableVM = new TypesMenuTableVM();
             VisitsTableVM = new VisitsTableVM();
+            UsersTableVM = new UsersTableVM();
             GenerateReportCommand = new GenerateReportCommand();
 
             CurrentUser = new Users();

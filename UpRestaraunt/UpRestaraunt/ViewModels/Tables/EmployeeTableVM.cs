@@ -35,7 +35,7 @@
         private string _numberPhone { get; set; }
 
         /// <inheritdoc cref="IdPost" />
-        private int _idPost { get; set; }
+        private int? _idPost { get; set; }
 
         /// <inheritdoc cref="Filter" />
         private string _filter { get; set; }
@@ -103,7 +103,7 @@
                 MiddleName = SelectedEmployee.Middle_name;
                 Address = SelectedEmployee.Address;
                 NumberPhone = SelectedEmployee.Number_phone;
-                IdPost = SelectedEmployee.Id_post is int selectedEmployeeIdPost ? selectedEmployeeIdPost : 0;
+                IdPost = SelectedEmployee.Id_post;
             }
         }
 
@@ -208,7 +208,7 @@
         /// <summary>
         /// Отображаемое значение id должности в таблице.
         /// </summary>
-        public int IdPost
+        public int? IdPost
         {
             get
             {
