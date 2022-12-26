@@ -85,20 +85,14 @@
         /// <param name="table"> Обновляемая таблица. </param>
         private DataTable GetUpdatedTable(string table)
         {
-            var commandRequest = string.Empty;
-
-            if (!IsAdmin)
-                commandRequest = DataBaseUtilities.BuildSqlSelectRequest(table, _propertyName, _idUser);
-            else
-                commandRequest = DataBaseUtilities.BuildSqlSelectAdminRequest(table);
+            var commandRequest = IsAdmin 
+                ? DataBaseUtilities.BuildSqlSelectAdminRequest(table) 
+                : DataBaseUtilities.BuildSqlSelectRequest(table, _propertyName, _idUser);
 
             var sqlCommand = new SqlCommand(commandRequest, _sqlConnection);
             var dataTable = new DataTable();
             SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
             dataAdapter.Fill(dataTable);
-
-            if (!IsAdmin)
-                dataTable.Columns.Remove(_propertyName);
 
             return dataTable;
         }

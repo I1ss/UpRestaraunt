@@ -17,7 +17,7 @@
             <RowDefinition Height="1.5*" />
             <RowDefinition Height="14*" />
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Margin="15 10 15 0" Background="DeepSkyBlue" Foreground="White" MaxHeight="48" FontSize="18" 
+        <Button Grid.Row="0" Margin="15 10 15 0" Background="DeepSkyBlue" Foreground="White" MaxHeight="48" FontSize="18"
                 BorderThickness="0" Content="Сгенерировать отчёт" Command="{Binding GenerateReportCommand}" CommandParameter="{Binding }" >
             <Button.Resources>
                 <Style TargetType="Border">
@@ -89,7 +89,20 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID клиента" Binding="{Binding Id_client}"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding Last_name}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding First_name}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Middle_name}"/>
+                            <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
+                            <DataGridTextColumn Header="Номер телефона" Binding="{Binding Number_phone}"/>
+                            <DataGridTextColumn Header="Кол-во заказов" Binding="{Binding Count_orders}"/>
+                            <DataGridTextColumn Header="ID посещения" Binding="{Binding Id_visit}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchClientBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -151,7 +164,17 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID блюда" Binding="{Binding Id_dish}"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                            <DataGridTextColumn Header="Время готовки" Binding="{Binding Time_cooking}"/>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="ID меню" Binding="{Binding Id_menu}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchDishBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -207,7 +230,15 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID блюда в заказе" Binding="{Binding Id_dishes_in_order}"/>
+                            <DataGridTextColumn Header="ID заказа" Binding="{Binding Id_order}"/>
+                            <DataGridTextColumn Header="ID блюда" Binding="{Binding Id_dish}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchDishInOrderBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -259,7 +290,19 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID работника" Binding="{Binding Id_employee}"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding Last_name}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding First_name}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Middle_name}" />
+                            <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
+                            <DataGridTextColumn Header="Номер телефона" Binding="{Binding Number_phone}"/>
+                            <DataGridTextColumn Header="ID должности" Binding="{Binding Id_post}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchEmployeeBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -319,7 +362,15 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID зала" Binding="{Binding Id_hall}"/>
+                            <DataGridTextColumn Header="Кол-во мест" Binding="{Binding Count_places}"/>
+                            <DataGridTextColumn Header="Готов?" Binding="{Binding Ready_to_work}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchHallBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -333,7 +384,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBox Margin="5" Text="{Binding CountPlaces}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
-                        <CheckBox Margin="5" IsChecked="{Binding ReadyToWork}" Grid.Row="0" Grid.Column="1"
+                        <CheckBox Margin="5" IsChecked="{Binding ReadyToWork}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
                     </Grid>
                     <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />
@@ -371,7 +422,15 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID меню" Binding="{Binding Id_menu}"/>
+                            <DataGridTextColumn Header="ID типа меню" Binding="{Binding Id_type_menu}"/>
+                            <DataGridTextColumn Header="ID зала" Binding="{Binding Id_hall}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchMenuBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -423,7 +482,15 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID заказа" Binding="{Binding Id_order}"/>
+                            <DataGridTextColumn Header="Сумма заказа" Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="ID посещения" Binding="{Binding Id_visit}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchOrderBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -475,7 +542,15 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID должности" Binding="{Binding Id_post}"/>
+                            <DataGridTextColumn Header="З/п" Binding="{Binding Salary}"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchPostBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -527,7 +602,14 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID столика" Binding="{Binding Id_table}"/>
+                            <DataGridTextColumn Header="ID зала" Binding="{Binding Id_hall}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchTableBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -577,7 +659,15 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" />
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID типа меню" Binding="{Binding Id_type_menu}"/>
+                            <DataGridTextColumn Header="Кол-во блюд" Binding="{Binding Count_dishes}"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchTypeMenuBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -629,7 +719,16 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" >
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID посещения" Binding="{Binding Id_visit}"/>
+                            <DataGridTextColumn Header="Время визита" Binding="{Binding Time_visit}"/>
+                            <DataGridTextColumn Header="ID клиента" Binding="{Binding Id_client}"/>
+                            <DataGridTextColumn Header="ID работника" Binding="{Binding Id_employee}"/>
+                            <DataGridTextColumn Header="ID столика" Binding="{Binding Id_table}"/>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}" Visibility="{Binding DataContext.CurrentUser.Is_admin, 
+                                Source={x:Reference SearchVisitsBox}, Converter={StaticResource VisibleOrCollapsedConverter}}" />
+                        </DataGrid.Columns>
                     </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
@@ -687,7 +786,13 @@
                         </TextBlock>
                     </Grid>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding DataView}" ColumnWidth="*" BorderBrush="#B4B4B4" BorderThickness="1 0 1 1" 
-                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" >
+                              SelectedItem="{Binding SelectedRow}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID пользователя" Binding="{Binding Id_user}"/>
+                            <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
+                            <DataGridTextColumn Header="Пароль" Binding="{Binding Password}"/>
+                            <DataGridTextColumn Header="Админ?" Binding="{Binding Is_admin}" />
+                        </DataGrid.Columns>
                     </DataGrid>
                     <Grid Grid.Row="2" Background="LightGray" >
                         <Grid.RowDefinitions>
@@ -701,12 +806,12 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBox Margin="5" Text="{Binding IdUser}" Grid.Row="0" Grid.Column="0" FontSize="16" MaxLength="16" 
-                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
+                                 Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" IsReadOnly="True" />
                         <TextBox Margin="5" Text="{Binding Login}" Grid.Row="0" Grid.Column="1" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
                         <TextBox Margin="5" Text="{Binding Password}" Grid.Row="0" Grid.Column="2" FontSize="16" MaxLength="16" 
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
-                        <TextBox Margin="5" Text="{Binding IsAdmin}" Grid.Row="0" Grid.Column="3" FontSize="16" MaxLength="16" 
+                        <CheckBox Margin="5" IsChecked="{Binding IsAdmin}" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center"
                                  Background="AliceBlue" BorderBrush="DimGray" VerticalAlignment="Center" />
                     </Grid>
                     <local:ButtonsControl Grid.Row="3" DataContext="{Binding }" Background="LightGray" />

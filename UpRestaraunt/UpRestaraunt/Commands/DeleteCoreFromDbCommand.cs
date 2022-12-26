@@ -43,6 +43,8 @@
                     DeleteFromDb(context, typesMenuTableVM);
                 else if (tableVM is VisitsTableVM visitsTableVM)
                     DeleteFromDb(context, visitsTableVM);
+                else if (tableVM is UsersTableVM usersTableVM)
+                    DeleteFromDb(context, usersTableVM);
                 else
                     throw new ArgumentOutOfRangeException(nameof(tableVM), "Недопустимый тип данных.");
 
@@ -145,6 +147,14 @@
             var currentVisit = context.Visits.FirstOrDefault(visit => visit.Id_visit == visitsTableVM.SelectedVisit.Id_visit);
             context.Visits.Remove(currentVisit);
             visitsTableVM.VisitsTable.Rows.Remove(visitsTableVM.SelectedRow.Row);
+        }
+
+        /// <inheritdoc cref="DeleteFromDb" />
+        private static void DeleteFromDb(RestaurantEntities context, UsersTableVM usersTableVM)
+        {
+            var currentUser = context.Users.FirstOrDefault(visit => visit.Id_user == usersTableVM.SelectedUser.Id_user);
+            context.Users.Remove(currentUser);
+            usersTableVM.UsersTable.Rows.Remove(usersTableVM.SelectedRow.Row);
         }
 
         /// <inheritdoc />
