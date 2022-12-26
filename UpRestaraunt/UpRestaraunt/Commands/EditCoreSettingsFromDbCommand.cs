@@ -42,6 +42,8 @@
                     EditTable(context, typesMenuTableVM);
                 else if (tableVM is VisitsTableVM visitsTableVM)
                     EditTable(context, visitsTableVM);
+                else if (tableVM is UsersTableVM usersTableVM)
+                    EditTable(context, usersTableVM);
                 else
                     throw new ArgumentOutOfRangeException(nameof(tableVM), "Недопустимый тип данных.");
             }
@@ -208,6 +210,20 @@
 
             context.SaveChanges();
             visitsTableVM.SelectedRow.ConvertToRowDbFromCore(visitsTableVM.VisitsTable, editableVisit);
+        }
+
+        /// <inheritdoc cref="EditTable" />
+        private static void EditTable(RestaurantEntities context, UsersTableVM usersTableVM)
+        {
+            var editableUser = context.Users.Find(usersTableVM.SelectedUser.Id_user);
+
+            editableUser.Id_user = (int) usersTableVM.IdUser;
+            editableUser.Login = usersTableVM.Login;
+            editableUser.Password = usersTableVM.Password;
+            editableUser.Is_admin = usersTableVM.IsAdmin;
+
+            context.SaveChanges();
+            usersTableVM.SelectedRow.ConvertToRowDbFromCore(usersTableVM.UsersTable, editableUser);
         }
 
         /// <inheritdoc />

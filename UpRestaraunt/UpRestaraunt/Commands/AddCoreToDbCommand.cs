@@ -42,6 +42,8 @@
                     AddToDb(context, typesMenuTableVM);
                 else if (tableVM is VisitsTableVM visitsTableVM)
                     AddToDb(context, visitsTableVM);
+                else if (tableVM is UsersTableVM usersTableVM)
+                    AddToDb(context, usersTableVM);
                 else
                     throw new ArgumentOutOfRangeException(nameof(tableVM), "Недопустимый тип данных.");
 
@@ -76,7 +78,7 @@
             context.SaveChanges();
 
             clientTableVM.ClientsTable.Rows.Add(client.Id_client, client.Last_name, client.First_name, client.Middle_name,
-                client.Address, client.Number_phone, client.Count_orders, client.Id_visit);
+                client.Address, client.Number_phone, client.Count_orders, client.Id_visit, client.Id_user);
         }
 
         /// <inheritdoc cref="AddToDb" />
@@ -94,7 +96,7 @@
             context.Dishes.Add(dish);
             context.SaveChanges();
 
-            dishesTableVM.DishesTable.Rows.Add(dish.Id_dish, dish.Title, dish.Time_cooking, dish.Price, dish.Id_menu);
+            dishesTableVM.DishesTable.Rows.Add(dish.Id_dish, dish.Title, dish.Time_cooking, dish.Price, dish.Id_menu, dish.Id_user);
         }
 
         /// <inheritdoc cref="AddToDb" />
@@ -111,7 +113,7 @@
             context.SaveChanges();
 
             dishesInOrderTableVM.DishesInOrderTable.Rows.Add(dishesInOrder.Id_dishes_in_order, dishesInOrderTableVM.IdOrder,
-                dishesInOrder.Id_dish);
+                dishesInOrder.Id_dish, dishesInOrder.Id_user);
         }
 
         /// <inheritdoc cref="AddToDb" />
@@ -132,7 +134,7 @@
             context.SaveChanges();
 
             employeeTableVM.EmployeeTable.Rows.Add(employee.Id_employee, employee.Last_name, employee.First_name, employee.Middle_name,
-                employee.Address, employee.Number_phone, employee.Id_post);
+                employee.Address, employee.Number_phone, employee.Id_post, employee.Id_user);
         }
 
         /// <inheritdoc cref="AddToDb" />
@@ -148,7 +150,7 @@
             context.Halls.Add(hall);
             context.SaveChanges();
 
-            hallsTableVM.HallsTable.Rows.Add(hall.Id_hall, hall.Count_places,hall.Ready_to_work);
+            hallsTableVM.HallsTable.Rows.Add(hall.Id_hall, hall.Count_places, hall.Ready_to_work, hall.Id_user);
         }
 
         /// <inheritdoc cref="AddToDb" />
@@ -164,7 +166,7 @@
             context.Menus.Add(menu);
             context.SaveChanges();
 
-            menuTableVM.MenuTable.Rows.Add(menu.Id_menu, menu.Id_type_menu, menu.Id_hall);
+            menuTableVM.MenuTable.Rows.Add(menu.Id_menu, menu.Id_type_menu, menu.Id_hall, menu.Id_user);
         }
 
         /// <inheritdoc cref="AddToDb" />
@@ -180,7 +182,7 @@
             context.Orders.Add(order);
             context.SaveChanges();
 
-            ordersTableVM.OrderTable.Rows.Add(order.Id_order, order.Price, order.Id_visit);
+            ordersTableVM.OrderTable.Rows.Add(order.Id_order, order.Price, order.Id_visit, order.Id_user);
         }
 
         /// <inheritdoc cref="AddToDb" />
@@ -196,7 +198,7 @@
             context.Posts.Add(post);
             context.SaveChanges();
 
-            postsTableVM.PostTable.Rows.Add(post.Id_post, post.Salary, post.Title);
+            postsTableVM.PostTable.Rows.Add(post.Id_post, post.Salary, post.Title, post.Id_user);
         }
 
         /// <inheritdoc cref="AddToDb" />
@@ -211,7 +213,7 @@
             context.Tables.Add(table);
             context.SaveChanges();
 
-            tablesTableVM.TabTable.Rows.Add(table.Id_table, table.Id_hall);
+            tablesTableVM.TabTable.Rows.Add(table.Id_table, table.Id_hall, table.Id_user);
         }
 
         /// <inheritdoc cref="AddToDb" />
@@ -227,7 +229,7 @@
             context.Types_menu.Add(typeMenu);
             context.SaveChanges();
 
-            typesMenuTableVM.TypeMenuTable.Rows.Add(typeMenu.Id_type_menu, typeMenu.Count_dishes, typeMenu.Title);
+            typesMenuTableVM.TypeMenuTable.Rows.Add(typeMenu.Id_type_menu, typeMenu.Count_dishes, typeMenu.Title, typeMenu.Id_user);
         }
 
         /// <inheritdoc cref="AddToDb" />
@@ -245,7 +247,24 @@
             context.Visits.Add(visit);
             context.SaveChanges();
 
-            visitsTableVM.VisitsTable.Rows.Add(visit.Id_visit, visit.Time_visit, visit.Id_client, visit.Id_employee, visit.Id_table);
+            visitsTableVM.VisitsTable.Rows.Add(visit.Id_visit, visit.Time_visit, visit.Id_client, visit.Id_employee, visit.Id_table, visit.Id_user);
+        }
+
+        /// <inheritdoc cref="AddToDb" />
+        private static void AddToDb(RestaurantEntities context, UsersTableVM usersTableVM)
+        {
+            var user = new Users
+            {
+                Id_user = (int) usersTableVM.IdUser,
+                Login = usersTableVM.Login,
+                Password = usersTableVM.Password,
+                Is_admin = usersTableVM.IsAdmin,
+            };
+
+            context.Users.Add(user);
+            context.SaveChanges();
+
+            usersTableVM.UsersTable.Rows.Add(user.Id_user, user.Login, user.Password, user.Is_admin);
         }
 
         /// <inheritdoc />
